@@ -2,3 +2,18 @@ node_modules/
 lib/
 .preview/
 *.tgz
+
+# Local tests
+tests/
+
+# Local database files and sidecars
+*.db
+*.db-*
+*.sqlite
+*.sqlite-*
+*.sqlite3
+*.sqlite3-*
+
+# Python cache
+__pycache__/
+*.py[cod]
