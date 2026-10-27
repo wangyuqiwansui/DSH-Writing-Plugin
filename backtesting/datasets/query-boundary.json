@@ -1,0 +1,230 @@
+{
+  "schemaVersion": "backtest-dataset-v1",
+  "id": "query-boundary",
+  "version": "1.0.0",
+  "title": "查询输入与项目范围边界",
+  "kind": "query-boundary",
+  "provenance": {
+    "type": "synthetic",
+    "reviewed": true,
+    "note": "固定合成回归样本；人工整理词用于可复现对照，不代表实时模型或真实业务成绩。"
+  },
+  "cases": [
+    {
+      "id": "allowed",
+      "split": "dev",
+      "request": {
+        "schemaVersion": "knowledge-query-v1",
+        "action": "retrieve",
+        "pluginInstanceId": "backtest",
+        "projectId": "fixture",
+        "operationId": "q1",
+        "question": "借火术",
+        "sources": [
+          {
+            "pluginInstanceId": "backtest",
+            "projectId": "fixture",
+            "artifactId": "a",
+            "versionId": "v1",
+            "kind": "knowledge_import_manifest",
+            "schemaVersion": "writing-kb-document-v1",
+            "contentHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "revision": 1
+          }
+        ],
+        "limit": 3,
+        "maxCharacters": 12000
+      },
+      "accept": true
+    },
+    {
+      "id": "empty-sources",
+      "split": "dev",
+      "request": {
+        "schemaVersion": "knowledge-query-v1",
+        "action": "retrieve",
+        "pluginInstanceId": "backtest",
+        "projectId": "fixture",
+        "operationId": "q1",
+        "question": "借火术",
+        "sources": [],
+        "limit": 3,
+        "maxCharacters": 12000
+      },
+      "accept": true
+    },
+    {
+      "id": "cross-project",
+      "split": "test",
+      "request": {
+        "schemaVersion": "knowledge-query-v1",
+        "action": "retrieve",
+        "pluginInstanceId": "backtest",
+        "projectId": "fixture",
+        "operationId": "q1",
+        "question": "借火术",
+        "sources": [
+          {
+            "pluginInstanceId": "backtest",
+            "projectId": "forbidden",
+            "artifactId": "a",
+            "versionId": "v1",
+            "kind": "knowledge_import_manifest",
+            "schemaVersion": "writing-kb-document-v1",
+            "contentHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "revision": 1
+          }
+        ],
+        "limit": 3,
+        "maxCharacters": 12000
+      },
+      "accept": false
+    },
+    {
+      "id": "cross-instance",
+      "split": "test",
+      "request": {
+        "schemaVersion": "knowledge-query-v1",
+        "action": "retrieve",
+        "pluginInstanceId": "backtest",
+        "projectId": "fixture",
+        "operationId": "q1",
+        "question": "借火术",
+        "sources": [
+          {
+            "pluginInstanceId": "other",
+            "projectId": "fixture",
+            "artifactId": "a",
+            "versionId": "v1",
+            "kind": "knowledge_import_manifest",
+            "schemaVersion": "writing-kb-document-v1",
+            "contentHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "revision": 1
+          }
+        ],
+        "limit": 3,
+        "maxCharacters": 12000
+      },
+      "accept": false
+    },
+    {
+      "id": "duplicate-source",
+      "split": "test",
+      "request": {
+        "schemaVersion": "knowledge-query-v1",
+        "action": "retrieve",
+        "pluginInstanceId": "backtest",
+        "projectId": "fixture",
+        "operationId": "q1",
+        "question": "借火术",
+        "sources": [
+          {
+            "pluginInstanceId": "backtest",
+            "projectId": "fixture",
+            "artifactId": "a",
+            "versionId": "v1",
+            "kind": "knowledge_import_manifest",
+            "schemaVersion": "writing-kb-document-v1",
+            "contentHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "revision": 1
+          },
+          {
+            "pluginInstanceId": "backtest",
+            "projectId": "fixture",
+            "artifactId": "a",
+            "versionId": "v1",
+            "kind": "knowledge_import_manifest",
+            "schemaVersion": "writing-kb-document-v1",
+            "contentHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "revision": 1
+          }
+        ],
+        "limit": 3,
+        "maxCharacters": 12000
+      },
+      "accept": false
+    },
+    {
+      "id": "unknown-sql",
+      "split": "test",
+      "request": {
+        "schemaVersion": "knowledge-query-v1",
+        "action": "retrieve",
+        "pluginInstanceId": "backtest",
+        "projectId": "fixture",
+        "operationId": "q1",
+        "question": "借火术",
+        "sources": [
+          {
+            "pluginInstanceId": "backtest",
+            "projectId": "fixture",
+            "artifactId": "a",
+            "versionId": "v1",
+            "kind": "knowledge_import_manifest",
+            "schemaVersion": "writing-kb-document-v1",
+            "contentHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "revision": 1
+          }
+        ],
+        "limit": 3,
+        "maxCharacters": 12000,
+        "sql": "select all"
+      },
+      "accept": false
+    },
+    {
+      "id": "over-budget",
+      "split": "test",
+      "request": {
+        "schemaVersion": "knowledge-query-v1",
+        "action": "retrieve",
+        "pluginInstanceId": "backtest",
+        "projectId": "fixture",
+        "operationId": "q1",
+        "question": "借火术",
+        "sources": [
+          {
+            "pluginInstanceId": "backtest",
+            "projectId": "fixture",
+            "artifactId": "a",
+            "versionId": "v1",
+            "kind": "knowledge_import_manifest",
+            "schemaVersion": "writing-kb-document-v1",
+            "contentHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "revision": 1
+          }
+        ],
+        "limit": 10000,
+        "maxCharacters": 12000
+      },
+      "accept": false
+    },
+    {
+      "id": "empty-question",
+      "split": "test",
+      "request": {
+        "schemaVersion": "knowledge-query-v1",
+        "action": "retrieve",
+        "pluginInstanceId": "backtest",
+        "projectId": "fixture",
+        "operationId": "q1",
+        "question": "",
+        "sources": [
+          {
+            "pluginInstanceId": "backtest",
+            "projectId": "fixture",
+            "artifactId": "a",
+            "versionId": "v1",
+            "kind": "knowledge_import_manifest",
+            "schemaVersion": "writing-kb-document-v1",
+            "contentHash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "revision": 1
+          }
+        ],
+        "limit": 3,
+        "maxCharacters": 12000
+      },
+      "accept": false
+    }
+  ]
+}

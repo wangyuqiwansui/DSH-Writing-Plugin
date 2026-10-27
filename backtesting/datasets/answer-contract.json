@@ -1,0 +1,74 @@
+{
+  "schemaVersion": "backtest-dataset-v1",
+  "id": "answer-contract",
+  "version": "1.0.0",
+  "title": "模型输出结构与引用校验",
+  "kind": "answer-contract",
+  "provenance": {
+    "type": "synthetic",
+    "reviewed": true,
+    "note": "固定合成回归样本；人工整理词用于可复现对照，不代表实时模型或真实业务成绩。"
+  },
+  "cases": [
+    {
+      "id": "valid-answer",
+      "split": "dev",
+      "output": "{\"status\": \"answered\", \"claims\": [{\"text\": \"借火术不能凭空生火。\", \"citations\": [{\"evidenceId\": \"fire:c1\", \"quote\": \"不能凭空生火\"}]}], \"missing\": []}",
+      "accept": true
+    },
+    {
+      "id": "valid-insufficient",
+      "split": "dev",
+      "output": "{\"status\": \"insufficient\", \"claims\": [], \"missing\": [\"缺少资料\"]}",
+      "accept": true
+    },
+    {
+      "id": "unknown-evidence",
+      "split": "test",
+      "output": "{\"status\": \"answered\", \"claims\": [{\"text\": \"借火术不能凭空生火。\", \"citations\": [{\"evidenceId\": \"other:c1\", \"quote\": \"不能凭空生火\"}]}], \"missing\": []}",
+      "accept": false
+    },
+    {
+      "id": "forged-quote",
+      "split": "test",
+      "output": "{\"status\": \"answered\", \"claims\": [{\"text\": \"借火术不能凭空生火。\", \"citations\": [{\"evidenceId\": \"fire:c1\", \"quote\": \"火焰永不熄灭\"}]}], \"missing\": []}",
+      "accept": false
+    },
+    {
+      "id": "empty-citations",
+      "split": "test",
+      "output": "{\"status\": \"answered\", \"claims\": [{\"text\": \"断言\", \"citations\": []}], \"missing\": []}",
+      "accept": false
+    },
+    {
+      "id": "extra-field",
+      "split": "test",
+      "output": "{\"status\": \"answered\", \"claims\": [{\"text\": \"借火术不能凭空生火。\", \"citations\": [{\"evidenceId\": \"fire:c1\", \"quote\": \"不能凭空生火\"}]}], \"missing\": [], \"execute\": \"DROP TABLE\"}",
+      "accept": false
+    },
+    {
+      "id": "contradictory-status",
+      "split": "test",
+      "output": "{\"status\": \"insufficient\", \"claims\": [{\"text\": \"借火术不能凭空生火。\", \"citations\": [{\"evidenceId\": \"fire:c1\", \"quote\": \"不能凭空生火\"}]}], \"missing\": [\"无\"]}",
+      "accept": false
+    },
+    {
+      "id": "semantic-error-structurally-valid",
+      "split": "test",
+      "output": "{\"status\": \"answered\", \"claims\": [{\"text\": \"借火术可以凭空生火。\", \"citations\": [{\"evidenceId\": \"fire:c1\", \"quote\": \"不能凭空生火\"}]}], \"missing\": []}",
+      "accept": true
+    },
+    {
+      "id": "truncated",
+      "split": "test",
+      "output": "{\"status\":",
+      "accept": false
+    }
+  ],
+  "evidence": [
+    {
+      "id": "fire:c1",
+      "text": "借火术只能引导视线内已有的火源，不能凭空生火。视线中断时，借火术立即停止。"
+    }
+  ]
+}

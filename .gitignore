@@ -1,12 +1,28 @@
+# Dependencies and build output
 node_modules/
-lib/
-.preview/
+/lib/
+/.preview/
 *.tgz
+*.tsbuildinfo
 
-# Local tests
-tests/
+# Local business data, exports, deliveries and execution evidence
+/data/
+/local-output/
+/deliveries/
+/backtest-reports/
+/.harness-analysis/
+/.playwright-mcp/
 
-# Local database files and sidecars
+# Legacy output locations (generators now use local-output/ or .preview/)
+/test-data/
+/examples/fog-harbor/*.json
+/examples/fog-harbor/manuscript.md
+/scripts/wiki-preview.json
+/docs/modules/database/legacy-rehearsal.json
+*.novel.json
+*.world.json
+
+# Local databases and their journals/backups
 *.db
 *.db-*
 *.sqlite
@@ -14,6 +30,30 @@ tests/
 *.sqlite3
 *.sqlite3-*
 
-# Python cache
+# Local secrets; share templates only
+.env
+.env.*
+!.env.example
+!.env.template
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Root tests are local-only; independent backtesting remains versioned
+/tests/
+
+# Test results and caches
+coverage/
+test-results/
+playwright-report/
+.pytest_cache/
+.cache/
 __pycache__/
 *.py[cod]
+*.log
+*.tmp
+*.bak
+.DS_Store
+Thumbs.db
+Desktop.ini

@@ -1,6 +1,6 @@
 {
   "name": "dsh-writing-workbench",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "description": "DSH 写作主工作台 / Writing workbench shell for DeepSeek Harness",
   "type": "module",
@@ -15,12 +15,83 @@
       "types": "./lib/client/index.d.ts",
       "default": "./lib/client.js"
     },
-    "./package.json": "./package.json"
+    "./contracts": {
+      "types": "./lib/shared/contracts/index.d.ts",
+      "default": "./lib/shared/contracts/index.js"
+    },
+    "./database": {
+      "types": "./lib/modules/database/host/index.d.ts",
+      "default": "./lib/modules/database/host/index.js"
+    },
+    "./middleware": {
+      "types": "./lib/infrastructure/middleware/host.d.ts",
+      "default": "./lib/infrastructure/middleware/host.js"
+    },
+    "./wiki/contracts": {
+      "types": "./lib/modules/wiki/contracts/index.d.ts",
+      "default": "./lib/modules/wiki/contracts/index.js"
+    },
+    "./quality": {
+      "types": "./lib/modules/quality/host.d.ts",
+      "default": "./lib/modules/quality/host.js"
+    },
+    "./quality/contracts": {
+      "types": "./lib/modules/quality/contracts.d.ts",
+      "default": "./lib/modules/quality/contracts.js"
+    },
+    "./author-persona": {
+      "types": "./lib/modules/author-persona/host/index.d.ts",
+      "default": "./lib/modules/author-persona/host/index.js"
+    },
+    "./author-persona/contracts": {
+      "types": "./lib/modules/author-persona/contracts/index.d.ts",
+      "default": "./lib/modules/author-persona/contracts/index.js"
+    },
+    "./package.json": "./package.json",
+    "./knowledge-core": {
+      "types": "./lib/modules/knowledge-core/index.d.ts",
+      "default": "./lib/modules/knowledge-core/index.js"
+    },
+    "./knowledge-query/contracts": {
+      "types": "./lib/modules/knowledge-query/contracts.d.ts",
+      "default": "./lib/modules/knowledge-query/contracts.js"
+    },
+    "./knowledge-core/read-only": {
+      "types": "./lib/modules/knowledge-core/read-only.d.ts",
+      "default": "./lib/modules/knowledge-core/read-only.js"
+    },
+    "./knowledge-query/read-only": {
+      "types": "./lib/modules/knowledge-query/read-only.d.ts",
+      "default": "./lib/modules/knowledge-query/read-only.js"
+    },
+    "./worldbuilding/read-only": {
+      "types": "./lib/modules/worldbuilding/read-only.d.ts",
+      "default": "./lib/modules/worldbuilding/read-only.js"
+    }
   },
   "files": [
     "lib",
     "cordis.patch.yml",
-    "README.md"
+    "README.md",
+    "storage/migrations",
+    "scripts/local_db.py",
+    "scripts/cleanup-world-directories.mjs",
+    "docs/modules/database/README.md",
+    "docs/modules/database/configuration-page.md",
+    "docs/modules/database/initialization.md",
+    "docs/modules/database/context-storage.md",
+    "docs/architecture/request-middleware.md",
+    "docs/modules/wiki/README.md",
+    "docs/modules/quality/README.md",
+    "docs/modules/novel/README.md",
+    "docs/modules/worldbuilding/README.md",
+    "docs/modules/chat/README.md",
+    "docs/modules/author-persona",
+    "docs/modules/knowledge-core",
+    "docs/modules/knowledge-query",
+    "backtesting",
+    "scripts/knowledge-backtest.mjs",
+    "docs/repository-hygiene.md"
   ],
   "engines": {
     "node": "^22.19.0 || >=24.0.0",
@@ -35,33 +106,59 @@
       "inject": [
         "@deepseek-ai/dsh-client-ui-renderer",
         "@deepseek-ai/dsh-client-ui-layout",
-        "@deepseek-ai/dsh-client-ui-sidebar"
+        "@deepseek-ai/dsh-client-ui-sidebar",
+        "@deepseek-ai/dsh-api-gateway"
       ]
     }
   },
   "scripts": {
     "build": "tsc -p tsconfig.json && node scripts/build.mjs",
     "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test": "npm run build && node --test tests/*.test.mjs",
+    "test": "npm run build && node --test backtesting/tests/*.test.mjs",
+    "db": "python -X utf8 scripts/local_db.py",
+    "db:init": "python -X utf8 scripts/local_db.py init",
     "prepack": "npm run build",
-    "preview": "node scripts/preview.mjs"
+    "preview": "npm run build && node scripts/preview.mjs",
+    "knowledge:backtest": "npm run backtest",
+    "backtest": "npm run build && node backtesting/run.mjs",
+    "check:repository": "node scripts/check-repository.mjs",
+    "example:generate": "npm run build && node examples/fog-harbor/create.mjs",
+    "test:local": "npm run build && node scripts/run-local-tests.mjs"
   },
   "peerDependencies": {
     "@deepseek-ai/cordis": "4.0.5",
+    "@deepseek-ai/dsh-api-gateway": "0.2.1-rc.2",
     "@deepseek-ai/dsh-client-ui-layout": "0.2.1-rc.2",
+    "@deepseek-ai/dsh-client-ui-renderer": "0.2.1-rc.2",
     "@deepseek-ai/dsh-client-ui-sidebar": "0.2.1-rc.2",
     "@deepseek-ai/dsh-client-ui-slots": "0.2.1-rc.2",
+    "@deepseek-ai/dsh-config-editor": "0.2.1-rc.2",
+    "@deepseek-ai/dsh-typert-protocol": "0.2.1-rc.2",
+    "@deepseek-ai/dsh-typert-registry": "0.2.1-rc.2",
     "react": "^18.2.0",
-    "@deepseek-ai/dsh-client-ui-renderer": "0.2.1-rc.2"
+    "@deepseek-ai/dsh-llm": "0.2.1-rc.2"
   },
   "devDependencies": {
     "@deepseek-ai/cordis-plugin-loader": "1.0.6",
+    "@deepseek-ai/dsh-api-gateway": "0.2.1-rc.2",
+    "@deepseek-ai/dsh-app-boot": "0.2.1-rc.2",
+    "@deepseek-ai/dsh-client-connection": "0.2.1-rc.2",
+    "@deepseek-ai/dsh-config-editor": "0.2.1-rc.2",
+    "@deepseek-ai/dsh-llm": "0.2.1-rc.2",
+    "@deepseek-ai/dsh-typert-protocol": "0.2.1-rc.2",
+    "@deepseek-ai/dsh-typert-registry": "0.2.1-rc.2",
     "@types/node": "^24.0.0",
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.1",
     "esbuild": "^0.25.12",
+    "js-yaml": "4.3.2",
     "react-dom": "^18.3.1",
-    "typescript": "^5.9.3",
-    "semver": "^7.7.3"
+    "semver": "^7.7.3",
+    "typescript": "^5.9.3"
+  },
+  "peerDependenciesMeta": {
+    "@deepseek-ai/dsh-config-editor": {
+      "optional": true
+    }
   }
 }

@@ -1,0 +1,628 @@
+{
+  "schemaVersion": "backtest-dataset-v1",
+  "id": "world-tree",
+  "version": "1.0.0",
+  "title": "世界观树状目录查询",
+  "kind": "world-query",
+  "provenance": {
+    "type": "synthetic",
+    "reviewed": true,
+    "note": "固定合成回归样本；人工整理词用于可复现对照，不代表实时模型或真实业务成绩。"
+  },
+  "cases": [
+    {
+      "id": "w1",
+      "split": "dev",
+      "question": "现实因果边界",
+      "expectedIds": [
+        "rule-realism"
+      ],
+      "recordIds": [],
+      "answerable": true
+    },
+    {
+      "id": "w2",
+      "split": "dev",
+      "question": "雾港与南北两岸",
+      "expectedIds": [
+        "place-fog-harbor"
+      ],
+      "recordIds": [],
+      "answerable": true
+    },
+    {
+      "id": "w3",
+      "split": "test",
+      "question": "浓雾停航制度",
+      "expectedIds": [
+        "rule-fog-crossing"
+      ],
+      "recordIds": [],
+      "answerable": true
+    },
+    {
+      "id": "w4",
+      "split": "test",
+      "question": "封存档案查阅制度",
+      "expectedIds": [
+        "rule-archive-access"
+      ],
+      "recordIds": [],
+      "answerable": true
+    }
+  ],
+  "world": {
+    "description": "一座依河入海的虚构小城，旧邮政所、档案馆和渡口维系着熟人社会的日常。1998 年洪水留下残缺的记录；一封邮戳年代异常的旧信，使这些记录重新进入人们的生活。谜底必须来自可追溯的人物行动与证据。",
+    "era": "主线：2026 年 11 月；可追溯历史：1986—2025 年",
+    "extensions": {},
+    "hardRules": [
+      {
+        "exceptions": "无例外；人物可以相信怪谈，但叙述不能把怪谈升级为超自然事实。",
+        "priorityOver": [],
+        "ruleId": "rule-realism"
+      }
+    ],
+    "name": "雾港 · 旧信与潮声",
+    "questions": [
+      {
+        "basis": {},
+        "blocking": false,
+        "id": "question-outage-duration",
+        "owner": "测试作者",
+        "question": "1998 年洪水当夜停电的准确时长是多少？",
+        "recordIds": [
+          "event-flood-1998"
+        ],
+        "resolution": "",
+        "status": "open"
+      }
+    ],
+    "reality": "fictional",
+    "records": [
+      {
+        "conditions": "适用于全部叙事层，包括回忆、梦境的解释与最终揭晓",
+        "confirmation": "confirmed",
+        "cost": "调查需要耗费时间与关系成本；未知信息必须经过接触、查证或有依据的推理获得",
+        "description": "人物、技术与自然现象遵循普通人的经验尺度。传闻与误认可以存在，但不构成超自然事实。",
+        "expiryReason": "",
+        "id": "rule-realism",
+        "importance": "key",
+        "kind": "rule",
+        "name": "现实因果边界",
+        "origin": "author",
+        "rule": "不存在可验证的超自然力量、时间倒流、读心或凭空恢复完整记忆。谜底必须能由人物行动、自然过程和可追溯证据解释。",
+        "ruleRefs": [],
+        "rumor": {
+          "period": "",
+          "range": "",
+          "spreaders": "",
+          "veracity": "unknown"
+        },
+        "scope": {
+          "conditions": "无例外",
+          "mode": "global",
+          "place": "本世界全部地点",
+          "subjects": "所有人物与叙述层",
+          "time": "全部已设定历史与主线时期"
+        },
+        "source": {
+          "citation": "",
+          "locator": "",
+          "period": ""
+        },
+        "truth": "fact",
+        "validity": "valid"
+      },
+      {
+        "conditions": "人物进行南北两岸之间的实际移动",
+        "confirmation": "confirmed",
+        "cost": "经桥增加行程时间；渡船受班次、票价与天气影响",
+        "description": "雾河把旧城分成两岸。南埠是旧邮政所与居民街，北岸设档案馆。正常步行经桥跨岸约 35 分钟，渡口正常航行约 10 分钟，候船另计。",
+        "expiryReason": "",
+        "id": "place-fog-harbor",
+        "importance": "key",
+        "kind": "setting",
+        "name": "雾港与南北两岸",
+        "origin": "author",
+        "rule": "跨岸行动必须选择桥梁或渡船，并保留行程与等待时间；浓雾时受渡口停航制度约束。",
+        "ruleRefs": [
+          "rule-realism",
+          "rule-fog-crossing"
+        ],
+        "rumor": {
+          "period": "",
+          "range": "",
+          "spreaders": "",
+          "veracity": "unknown"
+        },
+        "scope": {
+          "conditions": "按条目所述条件适用",
+          "mode": "local",
+          "place": "雾港",
+          "subjects": "当地居民与来访者",
+          "time": "2026 年 11 月，主线故事期间"
+        },
+        "source": {
+          "citation": "",
+          "locator": "",
+          "period": ""
+        },
+        "truth": "fact",
+        "validity": "valid"
+      },
+      {
+        "conditions": "雾河客渡运营时段；停航期间普通乘客需等待或改走桥梁",
+        "confirmation": "confirmed",
+        "cost": "候船、绕行与交通费用；不能用赶时间为理由跳过停航",
+        "description": "渡口每 30 分钟一班，正常运营时间为 06:00—20:00。调度记录中有停航与恢复时刻。",
+        "expiryReason": "",
+        "id": "rule-fog-crossing",
+        "importance": "key",
+        "kind": "rule",
+        "name": "浓雾停航制度",
+        "origin": "author",
+        "rule": "渡口值班员确认能见度低于 200 米后暂停客渡；恢复条件连续满足 30 分钟后，由值班员登记并恢复运营。主线客票每人每次 3 元。",
+        "ruleRefs": [],
+        "rumor": {
+          "period": "",
+          "range": "",
+          "spreaders": "",
+          "veracity": "unknown"
+        },
+        "scope": {
+          "conditions": "按条目所述条件适用",
+          "mode": "local",
+          "place": "雾河客渡及两侧码头",
+          "subjects": "普通乘客、船员与值班员",
+          "time": "2026 年 11 月，主线故事期间"
+        },
+        "source": {
+          "citation": "",
+          "locator": "",
+          "period": ""
+        },
+        "truth": "fact",
+        "validity": "valid"
+      },
+      {
+        "conditions": "工作日 09:00—17:00，申请理由与目标卷号明确；违规行为可以发生，但不能被叙述为正常权限",
+        "confirmation": "confirmed",
+        "cost": "通常需等待一个工作日；申请与接触记录会暴露调查意图",
+        "description": "馆内公开目录可在工作日白天查阅；涉及个人信息或事故原件的封存卷宗分开保管。",
+        "expiryReason": "",
+        "id": "rule-archive-access",
+        "importance": "key",
+        "kind": "rule",
+        "name": "封存档案查阅制度",
+        "origin": "author",
+        "rule": "查阅封存卷宗须填写具体用途、取得馆长书面许可并由档案员陪同；交接登记记录卷号、时间与经手人。读者不得带走原件。",
+        "ruleRefs": [],
+        "rumor": {
+          "period": "",
+          "range": "",
+          "spreaders": "",
+          "veracity": "unknown"
+        },
+        "scope": {
+          "conditions": "按条目所述条件适用",
+          "mode": "local",
+          "place": "北岸雾港档案馆",
+          "subjects": "申请人、档案员、馆长",
+          "time": "2010 年制度修订后至 2026 年主线"
+        },
+        "source": {
+          "citation": "",
+          "locator": "",
+          "period": ""
+        },
+        "truth": "fact",
+        "validity": "valid"
+      },
+      {
+        "conditions": "人物查询馆藏、申请原件或引用记录",
+        "confirmation": "confirmed",
+        "cost": "查找、申请与交叉核实需要时间",
+        "description": "保管部分邮政交接簿、渡口日志与洪水后的接收清单。材料不齐全，各来源可能互相矛盾。",
+        "expiryReason": "",
+        "id": "org-archives",
+        "importance": "key",
+        "kind": "setting",
+        "name": "雾港档案馆",
+        "origin": "author",
+        "rule": "馆藏条目只能证明某份记录被保存，不能单独保证记录内容真实；缺页处不自动补成事实。",
+        "ruleRefs": [
+          "rule-archive-access",
+          "rule-limited-digitization"
+        ],
+        "rumor": {
+          "period": "",
+          "range": "",
+          "spreaders": "",
+          "veracity": "unknown"
+        },
+        "scope": {
+          "conditions": "按条目所述条件适用",
+          "mode": "local",
+          "place": "北岸雾港档案馆",
+          "subjects": "当地居民与来访者",
+          "time": "2026 年 11 月，主线故事期间"
+        },
+        "source": {
+          "citation": "",
+          "locator": "",
+          "period": ""
+        },
+        "truth": "fact",
+        "validity": "valid"
+      },
+      {
+        "conditions": "无额外条件",
+        "confirmation": "confirmed",
+        "cost": "无额外代价",
+        "description": "由船主、装卸工和沿岸店主组成的地方合作社，维护旧仓库与互助账册。它熟悉沿岸人情，但没有档案馆审批权。",
+        "expiryReason": "",
+        "id": "org-harbor-coop",
+        "importance": "background",
+        "kind": "setting",
+        "name": "南埠码头合作社",
+        "origin": "author",
+        "rule": "合作社成员可以提供见闻与自有账册；不能替馆长批准查阅封存卷宗。",
+        "ruleRefs": [],
+        "rumor": {
+          "period": "",
+          "range": "",
+          "spreaders": "",
+          "veracity": "unknown"
+        },
+        "scope": {
+          "conditions": "按条目所述条件适用",
+          "mode": "local",
+          "place": "南埠码头及旧仓库",
+          "subjects": "当地居民与来访者",
+          "time": "2026 年 11 月，主线故事期间"
+        },
+        "source": {
+          "citation": "",
+          "locator": "",
+          "period": ""
+        },
+        "truth": "fact",
+        "validity": "valid"
+      },
+      {
+        "conditions": "店主同意；仅限参与赊账的店铺",
+        "confirmation": "confirmed",
+        "cost": "欠账影响信用与后续交易；提供账册可能损害邻里关系",
+        "description": "南埠几家老店仍给熟客记账，月底结清，账册偶尔能反映某人在某天到过店里。",
+        "expiryReason": "",
+        "id": "rule-neighborhood-credit",
+        "importance": "background",
+        "kind": "rule",
+        "name": "熟客赊账",
+        "origin": "author",
+        "rule": "只有店主认识并同意的熟客可以赊账；账册中的记名、补记和代付都需要核实，不能直接等同于本人到场。",
+        "ruleRefs": [],
+        "rumor": {
+          "period": "",
+          "range": "",
+          "spreaders": "",
+          "veracity": "unknown"
+        },
+        "scope": {
+          "conditions": "按条目所述条件适用",
+          "mode": "local",
+          "place": "南埠旧街的熟客店铺",
+          "subjects": "当地居民与来访者",
+          "time": "2026 年 11 月，主线故事期间"
+        },
+        "source": {
+          "citation": "",
+          "locator": "",
+          "period": ""
+        },
+        "truth": "fact",
+        "validity": "valid"
+      },
+      {
+        "conditions": "查找历史资料、核对邮戳或使用电子副本",
+        "confirmation": "confirmed",
+        "cost": "缺失材料需线下寻找；复制、转录与核对占用工时",
+        "description": "人物可使用普通手机、通信软件和电脑。档案馆有电子目录，但旧卷宗并未完整扫描；旧设备也不能恢复从未记录的信息。",
+        "expiryReason": "",
+        "id": "rule-limited-digitization",
+        "importance": "key",
+        "kind": "rule",
+        "name": "有限数字化与证据追溯",
+        "origin": "author",
+        "rule": "电子目录只提供题名、年代与卷号，不能直接搜索所有旧信正文。复制件与转录件须保留原件位置及经手信息；关键判断至少另找一项可追溯证据核对。",
+        "ruleRefs": [
+          "rule-realism"
+        ],
+        "rumor": {
+          "period": "",
+          "range": "",
+          "spreaders": "",
+          "veracity": "unknown"
+        },
+        "scope": {
+          "conditions": "按条目所述条件适用",
+          "mode": "local",
+          "place": "雾港档案馆与邮政资料保管点",
+          "subjects": "查询与使用资料的人",
+          "time": "截至 2026 年 11 月"
+        },
+        "source": {
+          "citation": "",
+          "locator": "",
+          "period": ""
+        },
+        "truth": "fact",
+        "validity": "valid"
+      },
+      {
+        "conditions": "无额外条件",
+        "confirmation": "confirmed",
+        "cost": "无额外代价",
+        "description": "每年十一月第一个周六，居民在自家门口挂一盏小灯纪念离乡与未归的人。活动通常持续到 21:00，不包含法定宵禁或封路。",
+        "expiryReason": "",
+        "id": "custom-tide-lanterns",
+        "importance": "background",
+        "kind": "setting",
+        "name": "十一月的岸灯夜",
+        "origin": "author",
+        "rule": "参与自愿。纪念行为不证明被纪念者死亡，也不能作为失踪案结论。",
+        "ruleRefs": [],
+        "rumor": {
+          "period": "",
+          "range": "",
+          "spreaders": "",
+          "veracity": "unknown"
+        },
+        "scope": {
+          "conditions": "按条目所述条件适用",
+          "mode": "local",
+          "place": "南埠旧街",
+          "subjects": "当地居民与来访者",
+          "time": "2000 年起；2026 年活动为 11 月 7 日晚"
+        },
+        "source": {
+          "citation": "",
+          "locator": "",
+          "period": ""
+        },
+        "truth": "fact",
+        "validity": "valid"
+      },
+      {
+        "conditions": "无额外条件",
+        "confirmation": "confirmed",
+        "cost": "无额外代价",
+        "description": "1998 年夏季洪水浸入南埠旧邮政所和沿岸仓库。部分纸件损毁，转移清单后来进入档案馆。洪水当夜停电的准确时长尚待作者确认。",
+        "expiryReason": "",
+        "id": "event-flood-1998",
+        "importance": "background",
+        "kind": "setting",
+        "name": "1998 年雾河洪水",
+        "origin": "author",
+        "rule": "只能认定已写明的损毁与转移事实；不能据此断言某份具体信件必然被毁，或推定停电期间发生的全部事件。",
+        "ruleRefs": [],
+        "rumor": {
+          "period": "",
+          "range": "",
+          "spreaders": "",
+          "veracity": "unknown"
+        },
+        "scope": {
+          "conditions": "按条目所述条件适用",
+          "mode": "local",
+          "place": "南埠低洼街区",
+          "subjects": "当时居民、邮政所与仓库保管人",
+          "time": "1998 年夏季及后续材料保管时期"
+        },
+        "source": {
+          "citation": "",
+          "locator": "",
+          "period": ""
+        },
+        "truth": "fact",
+        "validity": "valid"
+      },
+      {
+        "conditions": "1999—2009 年普通客渡单程",
+        "confirmation": "confirmed",
+        "cost": "每人每次 1 元",
+        "description": "洪水后的一段时期，纸质客票票面为每人一元。它可帮助识别旧票据的大致时期，不能代表当前收费。",
+        "expiryReason": "2010 年渡口改造后启用新价目表；2026 年主线执行浓雾停航制度条目中的 3 元票价。",
+        "id": "rule-old-ferry-fare",
+        "importance": "background",
+        "kind": "rule",
+        "name": "旧渡口一元票价",
+        "origin": "author",
+        "rule": "1999—2009 年普通单程客票每人 1 元；仅作为该时期的历史收费设定。",
+        "ruleRefs": [],
+        "rumor": {
+          "period": "",
+          "range": "",
+          "spreaders": "",
+          "veracity": "unknown"
+        },
+        "scope": {
+          "conditions": "按条目所述条件适用",
+          "mode": "local",
+          "place": "雾河旧渡口",
+          "subjects": "当时的普通乘客",
+          "time": "1999 年 1 月—2009 年 12 月"
+        },
+        "source": {
+          "citation": "",
+          "locator": "",
+          "period": ""
+        },
+        "truth": "fact",
+        "validity": "expired"
+      },
+      {
+        "conditions": "无额外条件",
+        "confirmation": "confirmed",
+        "cost": "无额外代价",
+        "description": "夜班船工之间流传：浓雾里听见旧灯塔第三声钟，便会有人收到多年未寄出的信。作者仅确认这则传闻在流传，未决定声音来源或传闻起因。",
+        "expiryReason": "",
+        "id": "rumor-third-bell",
+        "importance": "background",
+        "kind": "setting",
+        "name": "灯塔第三声钟",
+        "origin": "author",
+        "rule": "只能作为人物听闻、信仰或误判的材料；不能用它预测寄信、证明死人回信或跳过现实证据。",
+        "ruleRefs": [
+          "rule-realism"
+        ],
+        "rumor": {
+          "period": "2024—2026 年",
+          "range": "南埠码头、夜班候船棚、旧街茶馆",
+          "spreaders": "南埠夜班船工与部分茶馆常客",
+          "veracity": "unknown"
+        },
+        "scope": {
+          "conditions": "按条目所述条件适用",
+          "mode": "local",
+          "place": "东堤旧灯塔周边与南埠传播场所",
+          "subjects": "当地居民与来访者",
+          "time": "2024—2026 年"
+        },
+        "source": {
+          "citation": "",
+          "locator": "",
+          "period": ""
+        },
+        "truth": "rumor",
+        "validity": "valid"
+      },
+      {
+        "conditions": "无额外条件",
+        "confirmation": "confirmed",
+        "cost": "无额外代价",
+        "description": "现用建筑于 1991 年启用，1998 年遭洪水浸入。门框旁保留启用铜牌，后室存放待交接纸件。建筑启用时间不自动等同于此前邮政机构的成立时间。",
+        "expiryReason": "",
+        "id": "place-south-post-office",
+        "importance": "background",
+        "kind": "setting",
+        "name": "南埠旧邮政所",
+        "origin": "author",
+        "rule": "发现早于建筑启用年的邮戳时，应核对机构沿革、旧址、印章和转寄记录，不能直接判定时间矛盾或伪造。",
+        "ruleRefs": [],
+        "rumor": {
+          "period": "",
+          "range": "",
+          "spreaders": "",
+          "veracity": "unknown"
+        },
+        "scope": {
+          "conditions": "按条目所述条件适用",
+          "mode": "local",
+          "place": "南埠旧街邮政所现用建筑",
+          "subjects": "邮政人员及来访者",
+          "time": "1991—2026 年"
+        },
+        "source": {
+          "citation": "",
+          "locator": "",
+          "period": ""
+        },
+        "truth": "fact",
+        "validity": "valid"
+      }
+    ],
+    "relations": [
+      {
+        "condition": "查阅封存卷宗",
+        "from": "org-archives",
+        "id": "rel-archives-permit",
+        "period": "2010—2026 年",
+        "source": "原创世界设定 v1",
+        "to": "rule-archive-access",
+        "type": "执行查阅制度"
+      },
+      {
+        "condition": "检索馆藏",
+        "from": "org-archives",
+        "id": "rel-archives-index",
+        "period": "2026 年",
+        "source": "原创世界设定 v1",
+        "to": "rule-limited-digitization",
+        "type": "受目录与原件边界约束"
+      },
+      {
+        "condition": "仅指现用建筑及当时材料",
+        "from": "place-south-post-office",
+        "id": "rel-post-flood",
+        "period": "1998 年夏季",
+        "source": "原创世界设定 v1",
+        "to": "event-flood-1998",
+        "type": "受灾地点"
+      },
+      {
+        "condition": "不表示全部信件原文都被保留",
+        "from": "place-south-post-office",
+        "id": "rel-post-archives",
+        "period": "1998 年洪水后",
+        "source": "原创世界设定 v1",
+        "to": "org-archives",
+        "type": "部分交接清单的移交方"
+      },
+      {
+        "condition": "仅确认传播，不证明传闻内容真实",
+        "from": "org-harbor-coop",
+        "id": "rel-coop-bell",
+        "period": "2024—2026 年",
+        "source": "原创世界设定 v1",
+        "to": "rumor-third-bell",
+        "type": "部分成员传播传闻"
+      },
+      {
+        "condition": "不得混用历史与当前价格",
+        "from": "rule-old-ferry-fare",
+        "id": "rel-fare-change",
+        "period": "1999—2026 年",
+        "source": "原创世界设定 v1",
+        "to": "rule-fog-crossing",
+        "type": "历史收费与主线收费的时期对照"
+      }
+    ],
+    "schemaVersion": "writing-world-v3",
+    "space": "虚构沿海小城雾港：南埠旧街、北岸档案馆、雾河渡口、东堤旧灯塔",
+    "terms": [
+      {
+        "context": "雾港南岸旧城的地方称呼，不指整个城市",
+        "id": "term-south-bank",
+        "name": "南埠",
+        "period": "1986—2026 年",
+        "targetId": "place-fog-harbor"
+      },
+      {
+        "context": "当地居民对雾港档案馆的简称",
+        "id": "term-archives",
+        "name": "北岸馆",
+        "period": "2010—2026 年",
+        "targetId": "org-archives"
+      },
+      {
+        "context": "指现用的南埠旧邮政所建筑",
+        "id": "term-post-office",
+        "name": "老邮局",
+        "period": "1991—2026 年",
+        "targetId": "place-south-post-office"
+      },
+      {
+        "context": "船工谈论怪谈时的简称，不是实际信号制度",
+        "id": "term-third-bell",
+        "name": "三响",
+        "period": "2024—2026 年",
+        "targetId": "rumor-third-bell"
+      }
+    ]
+  },
+  "config": {
+    "maxRecords": 20,
+    "maxCharacters": 20000
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "schemaVersion": "backtest-catalog-v1",
+  "datasets": [
+    {
+      "id": "knowledge-retrieval",
+      "file": "knowledge-retrieval.json",
+      "title": "知识基础召回",
+      "kind": "retrieval",
+      "cases": 17
+    },
+    {
+      "id": "knowledge-multi-evidence",
+      "file": "knowledge-multi-evidence.json",
+      "title": "多资料证据覆盖",
+      "kind": "retrieval",
+      "cases": 4
+    },
+    {
+      "id": "knowledge-no-answer",
+      "file": "knowledge-no-answer.json",
+      "title": "无答案与近似词干扰",
+      "kind": "retrieval",
+      "cases": 4
+    },
+    {
+      "id": "answer-contract",
+      "file": "answer-contract.json",
+      "title": "模型输出结构与引用校验",
+      "kind": "answer-contract",
+      "cases": 9
+    },
+    {
+      "id": "query-boundary",
+      "file": "query-boundary.json",
+      "title": "查询输入与项目范围边界",
+      "kind": "query-boundary",
+      "cases": 8
+    },
+    {
+      "id": "data-quality",
+      "file": "data-quality.json",
+      "title": "测试集结构与证据标注质量",
+      "kind": "data-contract",
+      "cases": 5
+    },
+    {
+      "id": "model-quality",
+      "file": "model-quality.json",
+      "title": "模型格式与语义质量",
+      "kind": "model",
+      "cases": 4
+    },
+    {
+      "id": "prompt-injection",
+      "file": "prompt-injection.json",
+      "title": "资料注入与任务偏转",
+      "kind": "model",
+      "cases": 2
+    },
+    {
+      "id": "world-tree",
+      "file": "world-tree.json",
+      "title": "世界观树状目录查询",
+      "kind": "world-query",
+      "cases": 4
+    }
+  ]
+}

@@ -1,0 +1,349 @@
+{
+  "schemaVersion": "backtest-dataset-v1",
+  "id": "data-quality",
+  "version": "1.0.0",
+  "title": "测试集结构与证据标注质量",
+  "kind": "data-contract",
+  "provenance": {
+    "type": "synthetic",
+    "reviewed": true,
+    "note": "固定合成回归样本；人工整理词用于可复现对照，不代表实时模型或真实业务成绩。"
+  },
+  "cases": [
+    {
+      "id": "valid",
+      "split": "dev",
+      "input": {
+        "schemaVersion": "backtest-dataset-v1",
+        "id": "minimal",
+        "version": "1.0.0",
+        "title": "数据契约基准",
+        "kind": "retrieval",
+        "provenance": {
+          "type": "synthetic",
+          "reviewed": true,
+          "note": "固定合成回归样本；人工整理词用于可复现对照，不代表实时模型或真实业务成绩。"
+        },
+        "cases": [
+          {
+            "id": "dev",
+            "question": "借火术有哪些火源限制？",
+            "expected": [
+              {
+                "documentId": "fire",
+                "quote": "不能凭空生火"
+              }
+            ],
+            "answerable": true,
+            "split": "dev"
+          },
+          {
+            "id": "test",
+            "question": "视线中断会怎样？",
+            "expected": [
+              {
+                "documentId": "fire",
+                "quote": "立即停止"
+              }
+            ],
+            "answerable": true,
+            "split": "test"
+          }
+        ],
+        "documents": [
+          {
+            "id": "fire",
+            "title": "借火术",
+            "text": "借火术只能引导视线内已有的火源，不能凭空生火。视线中断时，借火术立即停止。",
+            "keywords": [
+              "借火术",
+              "施法",
+              "魔法",
+              "无火源",
+              "点燃",
+              "视线",
+              "限制"
+            ]
+          }
+        ],
+        "config": {
+          "topK": 3,
+          "maxCharacters": 12000,
+          "representations": [
+            "literal",
+            "lexical",
+            "enriched"
+          ]
+        }
+      },
+      "accept": true
+    },
+    {
+      "id": "forged-gold",
+      "split": "test",
+      "input": {
+        "schemaVersion": "backtest-dataset-v1",
+        "id": "minimal",
+        "version": "1.0.0",
+        "title": "数据契约基准",
+        "kind": "retrieval",
+        "provenance": {
+          "type": "synthetic",
+          "reviewed": true,
+          "note": "固定合成回归样本；人工整理词用于可复现对照，不代表实时模型或真实业务成绩。"
+        },
+        "cases": [
+          {
+            "id": "dev",
+            "question": "借火术有哪些火源限制？",
+            "expected": [
+              {
+                "documentId": "fire",
+                "quote": "不能凭空生火"
+              }
+            ],
+            "answerable": true,
+            "split": "dev"
+          },
+          {
+            "id": "test",
+            "question": "视线中断会怎样？",
+            "expected": [
+              {
+                "documentId": "fire",
+                "quote": "完全虚构的证据"
+              }
+            ],
+            "answerable": true,
+            "split": "test"
+          }
+        ],
+        "documents": [
+          {
+            "id": "fire",
+            "title": "借火术",
+            "text": "借火术只能引导视线内已有的火源，不能凭空生火。视线中断时，借火术立即停止。",
+            "keywords": [
+              "借火术",
+              "施法",
+              "魔法",
+              "无火源",
+              "点燃",
+              "视线",
+              "限制"
+            ]
+          }
+        ],
+        "config": {
+          "topK": 3,
+          "maxCharacters": 12000,
+          "representations": [
+            "literal",
+            "lexical",
+            "enriched"
+          ]
+        }
+      },
+      "accept": false
+    },
+    {
+      "id": "duplicate-case",
+      "split": "test",
+      "input": {
+        "schemaVersion": "backtest-dataset-v1",
+        "id": "minimal",
+        "version": "1.0.0",
+        "title": "数据契约基准",
+        "kind": "retrieval",
+        "provenance": {
+          "type": "synthetic",
+          "reviewed": true,
+          "note": "固定合成回归样本；人工整理词用于可复现对照，不代表实时模型或真实业务成绩。"
+        },
+        "cases": [
+          {
+            "id": "dev",
+            "question": "借火术有哪些火源限制？",
+            "expected": [
+              {
+                "documentId": "fire",
+                "quote": "不能凭空生火"
+              }
+            ],
+            "answerable": true,
+            "split": "dev"
+          },
+          {
+            "id": "dev",
+            "question": "视线中断会怎样？",
+            "expected": [
+              {
+                "documentId": "fire",
+                "quote": "立即停止"
+              }
+            ],
+            "answerable": true,
+            "split": "test"
+          }
+        ],
+        "documents": [
+          {
+            "id": "fire",
+            "title": "借火术",
+            "text": "借火术只能引导视线内已有的火源，不能凭空生火。视线中断时，借火术立即停止。",
+            "keywords": [
+              "借火术",
+              "施法",
+              "魔法",
+              "无火源",
+              "点燃",
+              "视线",
+              "限制"
+            ]
+          }
+        ],
+        "config": {
+          "topK": 3,
+          "maxCharacters": 12000,
+          "representations": [
+            "literal",
+            "lexical",
+            "enriched"
+          ]
+        }
+      },
+      "accept": false
+    },
+    {
+      "id": "missing-gold",
+      "split": "test",
+      "input": {
+        "schemaVersion": "backtest-dataset-v1",
+        "id": "minimal",
+        "version": "1.0.0",
+        "title": "数据契约基准",
+        "kind": "retrieval",
+        "provenance": {
+          "type": "synthetic",
+          "reviewed": true,
+          "note": "固定合成回归样本；人工整理词用于可复现对照，不代表实时模型或真实业务成绩。"
+        },
+        "cases": [
+          {
+            "id": "dev",
+            "question": "借火术有哪些火源限制？",
+            "expected": [],
+            "answerable": true,
+            "split": "dev"
+          },
+          {
+            "id": "test",
+            "question": "视线中断会怎样？",
+            "expected": [
+              {
+                "documentId": "fire",
+                "quote": "立即停止"
+              }
+            ],
+            "answerable": true,
+            "split": "test"
+          }
+        ],
+        "documents": [
+          {
+            "id": "fire",
+            "title": "借火术",
+            "text": "借火术只能引导视线内已有的火源，不能凭空生火。视线中断时，借火术立即停止。",
+            "keywords": [
+              "借火术",
+              "施法",
+              "魔法",
+              "无火源",
+              "点燃",
+              "视线",
+              "限制"
+            ]
+          }
+        ],
+        "config": {
+          "topK": 3,
+          "maxCharacters": 12000,
+          "representations": [
+            "literal",
+            "lexical",
+            "enriched"
+          ]
+        }
+      },
+      "accept": false
+    },
+    {
+      "id": "invalid-budget",
+      "split": "test",
+      "input": {
+        "schemaVersion": "backtest-dataset-v1",
+        "id": "minimal",
+        "version": "1.0.0",
+        "title": "数据契约基准",
+        "kind": "retrieval",
+        "provenance": {
+          "type": "synthetic",
+          "reviewed": true,
+          "note": "固定合成回归样本；人工整理词用于可复现对照，不代表实时模型或真实业务成绩。"
+        },
+        "cases": [
+          {
+            "id": "dev",
+            "question": "借火术有哪些火源限制？",
+            "expected": [
+              {
+                "documentId": "fire",
+                "quote": "不能凭空生火"
+              }
+            ],
+            "answerable": true,
+            "split": "dev"
+          },
+          {
+            "id": "test",
+            "question": "视线中断会怎样？",
+            "expected": [
+              {
+                "documentId": "fire",
+                "quote": "立即停止"
+              }
+            ],
+            "answerable": true,
+            "split": "test"
+          }
+        ],
+        "documents": [
+          {
+            "id": "fire",
+            "title": "借火术",
+            "text": "借火术只能引导视线内已有的火源，不能凭空生火。视线中断时，借火术立即停止。",
+            "keywords": [
+              "借火术",
+              "施法",
+              "魔法",
+              "无火源",
+              "点燃",
+              "视线",
+              "限制"
+            ]
+          }
+        ],
+        "config": {
+          "topK": 0,
+          "maxCharacters": 12000,
+          "representations": [
+            "literal",
+            "lexical",
+            "enriched"
+          ]
+        }
+      },
+      "accept": false
+    }
+  ]
+}
